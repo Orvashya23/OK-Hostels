@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DashBoard</title>
+</head>
+<body>
+    
+    <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OK Hostels Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>OK Hostels Dashboard</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="layout">
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <h2>OK Hostels</h2>
+    <ul>
+      <li class="active">Dashboard</li>
+      <li>My Booking</li>
+      <li>Explore</li>
+      <li>Logout</li>
+    </ul>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main">
+
+    <h1>Hostel Dashboard</h1>
+
+    <!-- Current Hostel -->
+    <section class="current-hostel">
+      <h2>🏠 Your Current Hostel</h2>
+      <div class="card">
+        <h3>Sunrise Boys Hostel</h3>
+        <p>Location: Vadodara</p>
+        <p>Room: 203</p>
+        <p>Status: Active</p>
+      </div>
+    </section>
+
+    <!-- Available Hostels -->
+    <section class="hostels">
+      <h2>🔍 Available Hostels</h2>
+
+      <div class="hostel-list">
+
+        <div class="hostel-card">
+          <h3>Green Valley Hostel</h3>
+          <p>₹4500/month</p>
+          <p>AC | WiFi | Food</p>
+          <button onclick="bookHostel('Green Valley Hostel')">Book</button>
+        </div>
+
+        <div class="hostel-card">
+          <h3>City Comfort Hostel</h3>
+          <p>₹3500/month</p>
+          <p>Non-AC | WiFi</p>
+          <button onclick="bookHostel('City Comfort Hostel')">Book</button>
+        </div>
+
+        <div class="hostel-card">
+          <h3>Royal Stay Hostel</h3>
+          <p>₹6000/month</p>
+          <p>AC | WiFi | Gym</p>
+          <button onclick="bookHostel('Royal Stay Hostel')">Book</button>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+</div>
+
+
+    <script src="script.js">
+        function logout(){
+            localStorage.removeItem("loggedInUser");
+            window.location.href = "index.html";
+            
+        }
+
+
+    </script>
+</body>
+</html>
