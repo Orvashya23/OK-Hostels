@@ -3,25 +3,430 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta name="description" content="Premium ecommerce platform with curated products and exceptional shopping experience.">
+    <meta name="theme-color" content="#090b1f">
+    <title>ShopHub - Premium Ecommerce Platform</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect fill='%237c3aed' width='100' height='100'/%3E%3Ctext x='50' y='65' font-size='70' fill='white' text-anchor='middle' font-weight='bold'%3ES%3C/text%3E%3C/svg%3E">
 </head>
 <body>
-    <div class="container">
-        <h2>Student Login</h2>
+    <!-- ═══════════════════════════════════════════════════════════════
+         HEADER & NAVIGATION
+    ═══════════════════════════════════════════════════════════════ -->
+    <header class="header">
+        <div class="header-top">
+            <div class="container">
+                <div class="header-top-content">
+                    <div class="header-info">
+                        <span class="info-item">🚚 Free Shipping on Orders $50+</span>
+                        <span class="info-item">📞 24/7 Customer Support</span>
+                    </div>
+                    <div class="header-actions">
+                        <a href="#account" class="action-link">Track Order</a>
+                        <a href="#account" class="action-link">Sign In</a>
+                        <a href="#account" class="action-link">Help</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        <form id="loginForm">
-            <input type="email" name="email" id="email" placeholder="Enter your email"><br><br>
-            <input type="password" name="password" id="password" placeholder="Enter your password"><br><br>
-            <button type="submit">Login</button>
-        </form>
-        <p id="loginMsg"></p>
-        <a href="register.html">New User? Register here</a>
+        <nav class="navbar">
+            <div class="container">
+                <div class="navbar-content">
+                    <div class="logo">
+                        <span class="logo-icon">🛍️</span>
+                        <span class="logo-text">ShopNot</span>
+                    </div>
+
+                    <div class="search-wrapper">
+                        <input type="text" id="search" class="search-input" placeholder="Search for products, brands, offers...">
+                        <button class="search-btn" aria-label="Search">
+                            <span>🔍</span>
+                        </button>
+                    </div>
+
+                    <div class="nav-actions">
+                        <button class="nav-icon-btn" title="Account">
+                            <span>👤</span>
+                            <small>Account</small>
+                        </button>
+                        <button class="nav-icon-btn" title="Wishlist">
+                            <span>❤️</span>
+                            <small id="wishlist-count">0</small>
+                        </button>
+                        <button class="nav-icon-btn theme-toggle" id="theme-toggle" title="Toggle Theme">
+                            <span id="theme-icon">🌙</span>
+                            <small>Theme</small>
+                        </button>
+                        <button class="nav-icon-btn cart-btn" id="cart-toggle" title="Shopping Cart">
+                            <span>🛒</span>
+                            <small id="cart-badge">0</small>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <div class="categories-bar">
+            <div class="container">
+                <div class="categories-scroll">
+                    <button class="category-chip active" data-category="all">All Products</button>
+                    <button class="category-chip" data-category="electronics">Electronics</button>
+                    <button class="category-chip" data-category="fashion">Fashion</button>
+                    <button class="category-chip" data-category="home">Home & Living</button>
+                    <button class="category-chip" data-category="beauty">Beauty</button>
+                    <button class="category-chip" data-category="books">Books</button>
+                    <button class="category-chip" data-category="sports">Sports</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-content">
+        <!-- ═══════════════════════════════════════════════════════════════
+             HERO SECTION
+        ═══════════════════════════════════════════════════════════════ -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Discover Amazing Products</h1>
+                <p class="hero-subtitle">Shop from thousands of premium items with guaranteed quality</p>
+                <div class="hero-offers">
+                    <div class="offer-card">
+                        <span class="offer-discount">Up to 70% OFF</span>
+                        <span class="offer-text">Summer Sale</span>
+                    </div>
+                    <div class="offer-card">
+                        <span class="offer-discount">Free Shipping</span>
+                        <span class="offer-text">Orders $50+</span>
+                    </div>
+                    <div class="offer-card">
+                        <span class="offer-discount">Easy Returns</span>
+                        <span class="offer-text">30-Day Policy</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="container">
+            <!-- ═══════════════════════════════════════════════════════════════
+                 FILTERS & SORTING
+            ═══════════════════════════════════════════════════════════════ -->
+            <aside class="filters-sidebar">
+                <div class="filters-header">
+                    <h3>Filters</h3>
+                    <button class="clear-filters" id="clear-filters">Clear All</button>
+                </div>
+
+                <!-- Price Filter -->
+                <div class="filter-section">
+                    <button class="filter-toggle" data-filter="price">
+                        <span>💰 Price Range</span>
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    <div class="filter-content" id="price-filter">
+                        <input type="range" min="0" max="1000" value="1000" class="price-slider">
+                        <div class="price-display">
+                            <span>$0</span>
+                            <span id="price-value">$1000</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Category Filter -->
+                <div class="filter-section">
+                    <button class="filter-toggle" data-filter="category">
+                        <span>📂 Category</span>
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    <div class="filter-content" id="category-filter">
+                        <label class="filter-option">
+                            <input type="checkbox" name="category" value="electronics">
+                            <span>Electronics</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" name="category" value="fashion">
+                            <span>Fashion</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" name="category" value="home">
+                            <span>Home & Living</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Rating Filter -->
+                <div class="filter-section">
+                    <button class="filter-toggle" data-filter="rating">
+                        <span>⭐ Rating</span>
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    <div class="filter-content" id="rating-filter">
+                        <label class="filter-option">
+                            <input type="radio" name="rating" value="4">
+                            <span>⭐⭐⭐⭐+ (4 & up)</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="radio" name="rating" value="3">
+                            <span>⭐⭐⭐+ (3 & up)</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Brand Filter -->
+                <div class="filter-section">
+                    <button class="filter-toggle" data-filter="brand">
+                        <span>🏷️ Brand</span>
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    <div class="filter-content" id="brand-filter">
+                        <label class="filter-option">
+                            <input type="checkbox" name="brand" value="premium">
+                            <span>Premium Brand</span>
+                        </label>
+                        <label class="filter-option">
+                            <input type="checkbox" name="brand" value="exclusive">
+                            <span>Exclusive</span>
+                        </label>
+                    </div>
+                </div>
+            </aside>
+
+            <!-- ═══════════════════════════════════════════════════════════════
+                 PRODUCTS SECTION
+            ═══════════════════════════════════════════════════════════════ -->
+            <section class="products-section">
+                <div class="products-header">
+                    <div class="results-info">
+                        <span id="results-count">0 Products</span>
+                    </div>
+                    <div class="sort-options">
+                        <label for="sort-select">Sort by:</label>
+                        <select id="sort-select" class="sort-select">
+                            <option value="relevance">Relevance</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="newest">Newest First</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div id="products" class="products-grid">
+                    <!-- Products will be dynamically loaded here -->
+                </div>
+
+                <div class="pagination">
+                    <button class="pagination-btn prev" disabled>← Previous</button>
+                    <div class="page-numbers" id="pagination"></div>
+                    <button class="pagination-btn next">Next →</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         SHOPPING CART SIDEBAR
+    ═══════════════════════════════════════════════════════════════ -->
+    <aside class="cart-sidebar" id="cart-sidebar">
+        <div class="cart-header">
+            <h2>Shopping Cart</h2>
+            <button class="close-btn" id="close-cart">✕</button>
+        </div>
+
+        <div class="cart-scroll">
+            <ul id="cart" class="cart-items">
+                <!-- Cart items will be added here -->
+            </ul>
+            
+            <div id="empty-cart" class="empty-cart">
+                <div class="empty-icon">🛒</div>
+                <p>Your cart is empty</p>
+                <p class="empty-hint">Add items to get started</p>
+            </div>
+        </div>
+
+        <div class="cart-footer">
+            <div class="cart-summary">
+                <div class="summary-row">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">$0.00</span>
+                </div>
+                <div class="summary-row">
+                    <span>Shipping:</span>
+                    <span id="shipping-cost">Free</span>
+                </div>
+                <div class="summary-row tax">
+                    <span>Tax:</span>
+                    <span id="tax">$0.00</span>
+                </div>
+                <hr>
+                <div class="summary-row total">
+                    <span>Total:</span>
+                    <span id="total-price">$0.00</span>
+                </div>
+            </div>
+            <button class="btn-checkout" id="checkout-btn">Proceed to Checkout</button>
+            <button class="btn-continue-shopping">Continue Shopping</button>
+        </div>
+    </aside>
+
+    <!-- ═══════════════════════════════════════════════════════════════
+         CHECKOUT MODAL
+    ═══════════════════════════════════════════════════════════════ -->
+    <div class="modal-backdrop" id="checkout-modal-backdrop"></div>
+    <div class="checkout-modal" id="checkout-modal">
+        <button class="modal-close" id="modal-close">✕</button>
+        
+        <div class="checkout-container">
+            <div class="checkout-steps">
+                <div class="step active" data-step="1">
+                    <span class="step-number">1</span>
+                    <span class="step-label">Shipping</span>
+                </div>
+                <div class="step" data-step="2">
+                    <span class="step-number">2</span>
+                    <span class="step-label">Payment</span>
+                </div>
+                <div class="step" data-step="3">
+                    <span class="step-number">3</span>
+                    <span class="step-label">Review</span>
+                </div>
+            </div>
+
+            <!-- Shipping Step -->
+            <div class="checkout-step-content active" data-step="1">
+                <h3>Shipping Information</h3>
+                <form class="form-group">
+                    <div class="form-row">
+                        <input type="text" placeholder="First Name" required class="form-input">
+                        <input type="text" placeholder="Last Name" required class="form-input">
+                    </div>
+                    <div class="form-row">
+                        <input type="email" placeholder="Email Address" required class="form-input">
+                        <input type="tel" placeholder="Phone Number" required class="form-input">
+                    </div>
+                    <input type="text" placeholder="Street Address" required class="form-input full-width">
+                    <div class="form-row">
+                        <input type="text" placeholder="City" required class="form-input">
+                        <input type="text" placeholder="State/Province" required class="form-input">
+                        <input type="text" placeholder="ZIP/Postal Code" required class="form-input">
+                    </div>
+                    <input type="text" placeholder="Country" required class="form-input full-width">
+                </form>
+            </div>
+
+            <!-- Payment Step -->
+            <div class="checkout-step-content" data-step="2">
+                <h3>Payment Method</h3>
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="card" checked>
+                        <span class="payment-label">💳 Credit Card</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="paypal">
+                        <span class="payment-label">🅿️ PayPal</span>
+                    </label>
+                    <label class="payment-option">
+                        <input type="radio" name="payment" value="apple">
+                        <span class="payment-label">🍎 Apple Pay</span>
+                    </label>
+                </div>
+
+                <form class="form-group card-form">
+                    <input type="text" placeholder="Cardholder Name" required class="form-input full-width">
+                    <input type="text" placeholder="Card Number" required class="form-input full-width">
+                    <div class="form-row">
+                        <input type="text" placeholder="MM/YY" required class="form-input">
+                        <input type="text" placeholder="CVC" required class="form-input">
+                    </div>
+                </form>
+            </div>
+
+            <!-- Review Step -->
+            <div class="checkout-step-content" data-step="3">
+                <h3>Order Review</h3>
+                <div id="order-review" class="order-review">
+                    <!-- Order summary will be displayed here -->
+                </div>
+            </div>
+
+            <div class="checkout-actions">
+                <button class="btn-secondary" id="prev-step">← Back</button>
+                <button class="btn-primary" id="next-step">Continue →</button>
+            </div>
+        </div>
     </div>
 
+    <!-- ═══════════════════════════════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════════════════════════════ -->
     <footer class="footer">
-        <p>&copy; 2026 Student Auth System. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h4>About ShopHub</h4>
+                    <ul>
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#press">Press</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#returns">Returns</a></li>
+                        <li><a href="#shipping">Shipping Info</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Policies</h4>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#security">Security</a></li>
+                        <li><a href="#cookies">Cookie Settings</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-column">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#facebook" class="social-link">f</a>
+                        <a href="#twitter" class="social-link">𝕏</a>
+                        <a href="#instagram" class="social-link">I</a>
+                        <a href="#linkedin" class="social-link">in</a>
+                    </div>
+                    <div class="newsletter">
+                        <p>Subscribe for special offers</p>
+                        <input type="email" placeholder="Your email" class="newsletter-input">
+                        <button class="newsletter-btn">Subscribe</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-payments">
+                    <span>We accept:</span>
+                    <span class="payment-icons">💳 🅿️ 🍎 🏦</span>
+                </div>
+                <div class="footer-copyright">
+                    <p>&copy; 2024 ShopHub. All rights reserved. Made by Orvashya Kailoo</p>
+                </div>
+                <div class="footer-scroll-top">
+                    <button id="scroll-top">↑ Back to Top</button>
+                </div>
+            </div>
+        </div>
     </footer>
+
+    <!-- Notification Container -->
+    <div id="notification-container" class="notification-container"></div>
 
     <script src="script.js"></script>
 </body>
